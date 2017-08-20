@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,33 +9,23 @@
 </head>
 <body>
 <%
-	String id = request.getParameter("id1");
-	String pwd = request.getParameter("pwd1");
-	out.println("입력하신 아이디 : " + id);
-	out.println("입력하신 비밀번호 : " + pwd);
-	
-	String dbId = "redfila";
-	String dbPwd = "red";
-	String result="";
-	boolean login = false;
-	
-	if(id.equals(dbId)){
-		if(pwd.equals(dbPwd)){
-			result = "로그인에 성공하셨습니다.";
-			login = true;
-		}else{
-			result = "비밀번호가 틀렸습니다.";
-		}
-	}else{
-		result = "없는 아이디 입니다.";
-	}
+String login = "false";
+if(session.getAttribute("login")!=null){
+	login = (String)session.getAttribute("login");
+}
+if(login.equals("false")){
 %>
-<script>
-	alert("<%=request%>");
-	if("<%=login%>"=="false"){
-		location.href="index.html";
-	}
-</script>
+<form action="/login_ok.jsp">
+아이디 : <input type="text" name="id" id="id"><br>
+비밀번호 : <input type="password" name="pwd" id="pwd"><br>
+<input type="submit" value="로그인">
+</form>
+<%
+}else if(login.equals("true")){
+	out.println(session.getAttribute("id") + "님 어서옵쇼");
+}
+
+%>
 
 </body>
 </html>
