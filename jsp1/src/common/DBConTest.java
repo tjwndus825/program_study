@@ -9,23 +9,19 @@ import java.sql.Statement;
 public class DBConTest {
 
 	public static void main(String[] args) {
-		String url = "jdbc:mysql://localhost:3306/jsp_study";
-		String id = "root";
-		String pwd = "0000";
 		Connection con;
 		Statement st;
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			con = DriverManager.getConnection(url, id, pwd);
+			con = DBConnector.getCon();
+			System.out.println("연결 성공");
 			st = con.createStatement();
-			String sql = "select * from user";
-			ResultSet rs = st.executeQuery(sql);
+			ResultSet rs = st.executeQuery("select * from user");
 			while(rs.next()) {
 				String user_no = rs.getString("user_no");
 				String id1 = rs.getString("id");
 				String password = rs.getString("password");
 				String name = rs.getString("name");
-				System.out.println(" 번호 : " + user_no + " 아이디 : " + id1 + " 비밀번호 : " + password + " 이름 :" + name);
+				System.out.println("번호:" + user_no + "  아이디:" + id1 + "  비밀번호:" + password + "  이름:" + name);
 			}
 			
 		}catch(ClassNotFoundException e) {

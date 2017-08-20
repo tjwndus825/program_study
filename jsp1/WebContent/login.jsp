@@ -20,6 +20,7 @@ if(login.equals("false")){
 비밀번호 : <input type="password" name="pwd" id="pwd"><br>
 <input type="submit" value="로그인">
 </form>
+
 <%
 }else if(login.equals("true")){
 	out.println(session.getAttribute("id") + "님 어서옵쇼");
